@@ -465,12 +465,13 @@ function insert(text)
 [<a href="'.HOME.'" target="_top">'.S_HOME.'</a>]
 [<a href="'.PHP_SELF.'?mode=admin">'.S_ADMIN.'</a>]
 </span>
-<div class="logo">'.$titlepart.'</div>
+<div class="logo"><span>'.$titlepart.'</span></div>
 <div class="headsub">'.S_HEADSUB.'</div><hr />';
 //echo "-->";
 if(USE_ADS1){$dat.=''.ADS1.'<hr />';} 
 }
 /* Contribution form */
+
 function form(&$dat,$resno,$admin=""){
   $maxbyte = MAX_KB * 1024;
   $no=$resno;
@@ -494,6 +495,7 @@ function form(&$dat,$resno,$admin=""){
 if($no){$dat.='<input type="hidden" name="resto" value="'.$no.'" />
 ';
 /*echo "-->";*/}
+
 if(!$admin&&BOTCHECK){
 $dat.='<table>
 <tr><td class="postblock" align="left">'.S_NAME.'</td><td align="left"><input type="text" name="name" size="28" /></td></tr>
@@ -518,6 +520,7 @@ $dat.='<table>
 <input type="submit" value="'.S_SUBMIT.'" /></td></tr>
 <tr><td class="postblock" align="left">'.S_COMMENT.'</td><td align="left"><textarea name="com" cols="48" rows="4"></textarea></td></tr>
 ';}
+  
 
 /*if(!$resno){*/
 
@@ -536,9 +539,34 @@ $dat.='<tr><td align="left" class="postblock" align="left">'.S_DELPASS.'</td><td
 <tr><td colspan="2">
 <div align="left" class="rules">'.S_RULES.'</div></td></tr></table></form></div></div><hr />
 ';
+  if (defined('GLOBAL_MSG') && GLOBAL_MSG!='') {
+	  $dat.=GLOBAL_MSG."\n<hr>\n";
+  }
 if(USE_ADS2){$dat.=''.ADS2.'<hr />';} 
-
 }
+/*if(!$resno){*/
+
+if(NOPICBOX&&!$resno){
+$dat.='<tr><td class="postblock" align="left">'.S_UPLOADFILE.'</td>
+<td><input type="file" name="upfile" size="35" />
+[<label><input type="checkbox" name="textonly" value="on" />'.S_NOFILE.'</label>]</td></tr>
+';}else{
+$dat.='<tr><td class="postblock" align="left">'.S_UPLOADFILE.'</td>
+<td><input type="file" name="upfile" size="35" />
+<input type="checkbox" name="textonly" value="on" style="display:none;" /></td></tr>
+';}
+/*}*/
+//Forced Anonymous
+if(FORCED_ANON == 1) {
+	$dat.='<table cellpadding=1 cellspacing=1><tr colspan=2><td><input type=hidden name=name><input type=hidden name=sub>&nbsp;</td></tr>'
+	.'<tr><td></td><td class="postblock" align="left"><b>'.S_EMAIL.'</b></td><td><input class=inputtext type=text name=email size="28"><span id="tdname"></span><span id="tdemail"></span>';
+} else {
+$dat.='<table cellpadding=1 cellspacing=1>
+<tr><td></td><td class="postblock" align="left"><b>'.S_NAME.'</b></td><td><input class=inputtext type=text name=name size="28"><span id="tdname"></span></td></tr>
+<tr><td></td><td class="postblock" align="left"><b>'.S_EMAIL.'</b></td><td><input class=inputtext type=text name=email size="28"><span id="tdemail"></span></td></tr>
+<tr><td></td><td class="postblock" align="left"><b>'.S_SUBJECT.'</b></td><td><input class=inputtext type=text name=sub size="35">';
+}
+// end forced anon
 
 /* Footer */
 function foot(&$dat){
@@ -554,7 +582,7 @@ function error($mes,$dest=''){
   head($dat);
   echo $dat;
   echo "<br /><br /><hr size=1><br /><br />
-        <center><font color=blue size=5>$mes<br /><br /><a href=".PHP_SELF2.">".S_RELOAD."</a></b></font></center>
+        <center><b><font color=red size=5>$mes</b><br /><br /><a href=".PHP_SELF2.">".S_RELOAD."</a></b></font></center>
         <br /><br /><hr size=1>";
   die("</body></html>");
 }
@@ -745,8 +773,8 @@ if(strlen($url) > 10) error(S_UNUSUAL,$dest);
   $yd = $youbi[gmdate("w", $time+9*60*60)] ;
   $now = gmdate("y/m/d",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
   if(DISP_ID){
-    if($email&&DISP_ID==1){
-      $now .= " ID:???";
+    if($email=="sage"&&DISP_ID==1){
+      $now .= " ID:Heaven";
     }else{
       $now.=" ID:".substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+9*60*60)),'id'),-8);
     }

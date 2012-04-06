@@ -34,7 +34,7 @@ define(S_PREV, 'Previous');										//Defines previous button
 define(S_FIRSTPG, 'Previous');										//Defines previous button
 define(S_NEXT, 'Next');											//Defines next button
 define(S_LASTPG, 'Next');										//Defines next button
-define(S_FOOT, '- <a href="http://www.2chan.net/" target="_blank">futaba</a> + <a href="http://1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="http://saguaroimgboard.co.cc/" target="_blank">saguaro 0.97.8</a> + <a href="http://github.com/314parley" target="_blank">STIBS '.STIBS_VERSION.'</a> -'); //Prints footer (leave these credits)
+define(S_FOOT, '- <a href="http://www.2chan.net/" target="_blank">futaba</a> + <a href="http://1chan.net/futallaby/" target="_blank">futallaby</a> + <a href="http://saguaroimgboard.co.cc/" target="_blank">saguaro 0.97.8</a> + <a href="https://github.com/314parley/STIBS" target="_blank">STIBS r.2</a> -'); //Prints footer (leave these credits)
 define(S_RELOAD, 'Return');										//Reloads the image board (refresh)
 define(S_UPFAIL, 'Error: Upload failed.');								//Returns error for failed upload (reason: unknown?)
 define(S_NOREC, 'Error: Cannot find record.');								//Returns error when record cannot be found
@@ -102,4 +102,6 @@ define(S_BANS, 'Ban');
 define(S_BANS_EXTRA, '');
 define(S_CAPFAIL, 'You seem to have mistyped the verification.');
 define(STIBS_VERSION, 'v0.01alpha');
+?>
+;
 ?>

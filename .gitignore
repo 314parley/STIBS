@@ -1,1 +1,8 @@
+#Ignore the hidden yotsuba file stored on my computer
 yotsuba.txt
+#Stupid mac
+.DS_Store
+#Remove home test files
+index.html
+src/*
+thumb/*
